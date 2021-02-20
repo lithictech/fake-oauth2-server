@@ -48,7 +48,7 @@ function validateClientId(actualClientId, res) {
 }
 
 function permittedRedirectURLs() {
-    return _.reduce(PERMITTED_REDIRECT_URLS, (a, b) => a === "" ? b : a + ", " + b, "" );
+    return PERMITTED_REDIRECT_URLS.join(', ')
 }
 
 function validateAuthRequest(req, res) {
