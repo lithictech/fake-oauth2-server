@@ -2,3 +2,4 @@
 fake-oauth2.iml
 node_modules
 fake-oauth2-server.iml
+.env
