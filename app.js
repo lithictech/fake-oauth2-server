@@ -151,12 +151,13 @@ function validateTokenExpiration(date_of_creation, expires_in) {
 }
 
 function createToken(name, email, expires_in, refresh_token_expires_in, client_state) {
+  email = email || 'fake@fake.co';
   const code = "C-" + randomstring.generate(3);
   const accesstoken = "ACCT-" + randomstring.generate(6);
   const refreshtoken = "REFT-" + randomstring.generate(6);
   const id_token = "IDT-" + randomstring.generate(6);
   const date_of_creation = Date.now()/1000 | 0;
-  
+
   const token = {
     access_token: accesstoken,
     expires_in: expires_in,
@@ -167,6 +168,7 @@ function createToken(name, email, expires_in, refresh_token_expires_in, client_s
     token_type: "Bearer"
   };
   id_token2personData[id_token] = authHeader2personData["Bearer " + accesstoken] = {
+    id: email,
     email: email,
     email_verified: true,
     name: name,
@@ -175,6 +177,7 @@ function createToken(name, email, expires_in, refresh_token_expires_in, client_s
   };
   code2token[code] = token;
   refresh2personData[refreshtoken] = {
+    id: email,
     name: name,
     email: email,
     expires_in: expires_in,
