@@ -18,8 +18,8 @@ const EXPECTED_CLIENT_ID = process.env.EXPECTED_CLIENT_ID || "dummy-client-id";
 const EXPECTED_CLIENT_SECRET = process.env.EXPECTED_CLIENT_SECRET || "dummy-client-secret";
 const AUTH_REQUEST_PATH = process.env.AUTH_REQUEST_PATH || "/o/oauth2/v2/auth";
 const ACCESS_TOKEN_REQUEST_PATH = process.env.ACCESS_TOKEN_REQUEST_PATH || "/oauth2/v4/token";
-const USERINFO_REQUEST_URL = process.env.TOKENINFO_REQUEST_URL || "/oauth2/v3/userinfo";
-const TOKENINFO_REQUEST_URL = process.env.TOKENINFO_REQUEST_URL || "/oauth2/v3/tokeninfo";
+const USERINFO_REQUEST_PATH = process.env.USERINFO_REQUEST_PATH || "/oauth2/v3/userinfo";
+const TOKENINFO_REQUEST_PATH = process.env.TOKENINFO_REQUEST_PATH || "/oauth2/v3/tokeninfo";
 const PERMITTED_REDIRECT_URLS = process.env.PERMITTED_REDIRECT_URLS ? process.env.PERMITTED_REDIRECT_URLS.split(",") : ["http://localhost:8181/auth/login"];
 
 const code2token = {};
@@ -244,7 +244,7 @@ app.post(ACCESS_TOKEN_REQUEST_PATH, (req, res) => {
   res.end();
 });
 
-app.get(USERINFO_REQUEST_URL, (req, res) => {
+app.get(USERINFO_REQUEST_PATH, (req, res) => {
   const token_info = authHeader2personData[req.headers["authorization"]];
   if (token_info !== undefined) {
     console.log("userinfo response", token_info);
@@ -261,7 +261,7 @@ app.get(USERINFO_REQUEST_URL, (req, res) => {
   res.end();
 });
 
-app.get(TOKENINFO_REQUEST_URL, (req, res) => {
+app.get(TOKENINFO_REQUEST_PATH, (req, res) => {
   if (req.query.id_token == null) {
       res.status(400)
       res.send("missing id_token query parameter");

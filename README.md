@@ -11,13 +11,14 @@ Currently under development.
 ## Building & running
 
  - clone this repo
- - run `npm install`
- - start the server using `node server.js`
- - you can run the unittests using `npm test`
+ - run `yarn install`
+ - start the server using `yarn start`
+ - you can run the unittests using `yarn test`
 
 ## Configuration
 
-The application can be configured using *environment variables* before executing `node server.js` . The default configuration matches the relative URIs of the google OAuth2 implementation.
+The application can be configured using *environment variables* before executing `yarn start`.
+The default configuration matches the relative URIs of the google OAuth2 implementation.
 
 List of environment variables:
 
@@ -26,8 +27,10 @@ List of environment variables:
 |`PORT`|8282|The port the server listens on|
 |`EXPECTED_CLIENT_ID`|`dummy-client-id`|The [client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) which your SUT should send to the OAuth2 server in authentication requests and access token requests.|
 |`EXPECTED_CLIENT_SECRET`|`dummy-client-secret`|The [client secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) which your SUT should send to the OAuth2 server in access token requests.|
-|`AUTH_REQUEST_PATH`|`/o/oauth2/v2/auth`|The HTTP path of the OAuth2 [authorization endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) which the fake server listens on|
-|`ACCESS_TOKEN_REQUEST_PATH`|`/oauth2/v4/token`|The HTTP path of the [access token request](https://tools.ietf.org/html/rfc6749#section-4.1.3) which the fake server listens on|
-|`PERMITTED_REDIRECT_URLS`|`http://localhost:8181/auth/login`|comma-separated list of permitted [redirection endpoints](https://tools.ietf.org/html/rfc6749#section-3.1.2)|
+|`AUTH_REQUEST_PATH`|`/o/oauth2/v2/auth`|The HTTP path of the OAuth2 [authorization endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) which the fake server listens on.|
+|`ACCESS_TOKEN_REQUEST_PATH`|`/oauth2/v4/token`|The HTTP path of the [access token request](https://tools.ietf.org/html/rfc6749#section-4.1.3) which the fake server listens on.|
+|`PERMITTED_REDIRECT_URLS`|`http://localhost:8181/auth/login`|comma-separated list of permitted [redirection endpoints](https://tools.ietf.org/html/rfc6749#section-3.1.2).|
+|`TOKENINFO_REQUEST_PATH`|`http://localhost:8181/oauth2/v3/tokeninfo`|The HTTP path to get info about a token which the fake server listens on.|
+|`USERINFO_REQUEST_PATH`|`http://localhost:8181/oauth2/v3/userinfo`|The HTTP path to get info about a user which the fake server listens on. Like a user profile endpoint.|
 
-All those environment variables are defined in `.env` file with some examples. To use them, set them with your environment values and run `$node server.js` or `$npm start`. Those variables are then magically put in the process environment variables using [dotenv](https://www.npmjs.com/package/dotenv).
+All of those variables can be set in a `.env` file, and are injected using the magic of using [dotenv](https://www.npmjs.com/package/dotenv).
